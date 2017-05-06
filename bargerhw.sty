@@ -161,7 +161,7 @@
 % allows page breaks for long equations...you can prevent a page-break with \\*
 \allowdisplaybreaks               
 
-\numberwithin{equation}{section}
+
 
 % Theorem style information
 \newtheoremstyle{plain}
@@ -175,7 +175,6 @@
   {\thmname{#1}\thmnumber{ #2}\ifx#3\empty\else\ (#3)\fi}
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
-\numberwithin{theorem}{section}
 % [theorem] ==> theorems and lemmas will share a counter
 \newtheorem{lemma}[theorem]{Lemma}       	
 \newtheorem{proposition}[theorem]{Proposition}
@@ -236,16 +235,21 @@
 \newcounter{@exerciseCounter}
 \newcounter{@subExerciseCounter}
 \newcounter{@subSubExerciseCounter}
+\newcounter{@equationCounter}
 
 \setcounter{@exerciseCounter}{1}
 \setcounter{@subExerciseCounter}{1}
 \setcounter{@subSubExerciseCounter}{1}
+\setcounter{@equationCounter}{0}
 
 \def\subExerciseNumType{\arabic}
 \def\subSubExerciseNumType{\arabic}
 
+\numberwithin{equation}{@equationCounter}
+\numberwithin{theorem}{@equationCounter}
 
 \NewDocumentEnvironment{exercise}{o}{
+	
 	\IfNoValueTF{#1}{
 		\section*{Exercise \arabic{@exerciseCounter}}
 	}
@@ -256,6 +260,7 @@
 }
 {
 	\stepcounter{@exerciseCounter}
+	\stepcounter{@equationCounter}
 }
 
 \NewDocumentEnvironment{subpart}{o}{
@@ -269,7 +274,7 @@
 	
 }
 {
-	\stepcounter{@subExerciseCounter}
+	
 }
 
 \NewDocumentEnvironment{subsubpart}{o}{
