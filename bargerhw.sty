@@ -1,0 +1,373 @@
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bargerhw}[2017/05/01 Lorig Package, written by Matt Lorig and Weston Barger]
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 				OPTION DECLARATION
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% use matt's macros?
+\newif\if@lmacro
+\@lmacrofalse
+\DeclareOption{lmacro}{
+	\@lmacrotrue
+}
+
+
+
+% draft
+% i.e. show eqrefs or not
+\newif\if@draft
+\@draftfalse
+\DeclareOption{draft}{
+	\@drafttrue
+}
+
+\newif\if@doublespace
+\@doublespacefalse
+\DeclareOption{doublespace}{
+	\@doublespacetrue
+}
+
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 				REQUIRED PACKAGES
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+% packages required for 
+
+\RequirePackage[
+	paperwidth		=8.5in,
+	paperheight		=11in,
+	top				=1.25in, 
+	bottom			=1.25in, 
+	left			=1.0in, 
+	right			=1.0in
+	]{geometry}
+
+
+
+%mathastext tells you to do so? 
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{microtype}
+
+
+% sets default text font to concrete modern
+\renewcommand{\rmdefault}{ccr}
+\renewcommand*\familydefault{\rmdefault}
+
+\RequirePackage[LGRgreek,frenchmath]{mathastext}
+\MTgreekfont{lmtt} % no lgr lmvtt, so use lgr lmtt
+\Mathastext
+
+% make the header titles 
+\RequirePackage{sectsty}
+\allsectionsfont{\mdseries\scshape}
+
+% ams and other math
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+
+% gives you \mathscr font
+\RequirePackage[mathscr]{eucal}
+% gives you \mathds font
+\RequirePackage{dsfont}
+
+
+\RequirePackage{natbib}
+\RequirePackage[shortlabels]{enumitem}
+\RequirePackage{mdwlist}
+
+% gives colors for hyperref
+\RequirePackage[dvipsnames]{xcolor}	
+
+% enables and customizes hyperlinks
+\RequirePackage[plainpages=false, pdfpagelabels]{hyperref}
+
+% used for show only labels
+\RequirePackage{mathtools}                     
+
+% needed to test for ifpdf
+\RequirePackage{ifpdf}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 				OPTIONAL PACKAGE PROCESSING
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Are we using pdflatex ? 
+\ifpdf
+	\RequirePackage[pdftex]{graphicx}
+	\RequirePackage{epstopdf}
+\else
+	\RequirePackage{graphicx}
+\fi
+
+
+\if@doublespace
+	\linespread{1.6}
+\else
+	\linespread{1.3}
+\fi
+
+\if@lmacro
+	\RequirePackage{lmacros}
+\fi
+
+\if@draft
+	\RequirePackage[left]{showlabels} 
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 				STYLE PREFERENCES
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Make \eqnarray illegal.
+\renewenvironment{eqnarray}{\PackageError{lorig}{eqnarray is illegal. Use align.}{}}{}
+\renewenvironment{eqnarray*}{\PackageError{lorig}{eqnarray is illegal. Use align.}{}}{}
+
+
+% show only labels
+\mathtoolsset{showonlyrefs=true}
+
+% set up the hyperlink style
+\hypersetup{
+	colorlinks   = true,
+	citecolor    = RoyalBlue, %NavyBlue,
+	linkcolor    = RubineRed, %Maroon,
+	urlcolor     = Turquoise
+	}
+
+% allows page breaks for long equations...you can prevent a page-break with \\*
+\allowdisplaybreaks               
+
+\numberwithin{equation}{section}
+
+% Theorem style information
+\newtheoremstyle{plain}
+  {}   % ABOVESPACE
+  {}   % BELOWSPACE
+  {\itshape}  % BODYFONT
+  {}       % INDENT (empty value is the same as 0pt)
+  {\mdseries\scshape} % HEADFONT
+  {.}         % HEADPUNCT
+  { } % HEADSPACE
+  {\thmname{#1}\thmnumber{ #2}\ifx#3\empty\else\ (#3)\fi}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\numberwithin{theorem}{section}
+% [theorem] ==> theorems and lemmas will share a counter
+\newtheorem{lemma}[theorem]{Lemma}       	
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+
+% Theorem style information
+\newtheoremstyle{definition}
+  {}   % ABOVESPACE
+  {}   % BELOWSPACE
+  {}  % BODYFONT
+  {}       % INDENT (empty value is the same as 0pt)
+  {\mdseries\scshape} % HEADFONT
+  {.}         % HEADPUNCT
+  { } % HEADSPACE
+  {\thmname{#1}\thmnumber{ #2}\ifx#3\empty\else\ (#3)\fi}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{assumption}[theorem]{Assumption}
+
+
+
+\usepackage{relsize}
+
+\let\oGamma \Gamma       
+\let\oSigma \Sigma      
+\let\oLambda\Lambda       
+\let\oPsi   \Psi         
+\let\oDelta \Delta        
+\let\oXi    \Xi          
+\let\oUpsilon\Upsilon    
+\let\oOmega \Omega       
+\let\oTheta \Theta        
+\let\oPi    \Pi          
+\let\oPhi   \Phi      
+
+\renewcommand\Gamma  {\mathlarger\oGamma  } 
+\renewcommand\Sigma  {\mathlarger\oSigma  }
+\renewcommand\Lambda {\mathlarger\oLambda }
+\renewcommand\Psi    {\mathlarger\oPsi    }
+\renewcommand\Delta  {\mathlarger\oDelta  }
+\renewcommand\Xi     {\mathlarger\oXi     }
+\renewcommand\Upsilon{\mathlarger\oUpsilon}
+\renewcommand\Omega  {\mathlarger\oOmega  }
+\renewcommand\Theta  {\mathlarger\oTheta  }
+\renewcommand\Pi     {\mathlarger\oPi     }
+\renewcommand\Phi    {\mathlarger\oPhi    }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% do homework stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xparse}
+\usepackage{ifthen}
+
+\newcounter{@exerciseCounter}
+\newcounter{@subExerciseCounter}
+\newcounter{@subSubExerciseCounter}
+
+\setcounter{@exerciseCounter}{1}
+\setcounter{@subExerciseCounter}{1}
+\setcounter{@subSubExerciseCounter}{1}
+
+\def\subExerciseNumType{\arabic}
+\def\subSubExerciseNumType{\arabic}
+
+
+\NewDocumentEnvironment{exercise}{o}{
+	\IfNoValueTF{#1}{
+		\section*{Exercise \arabic{@exerciseCounter}}
+	}
+	{
+		\section*{Exercise \arabic{@exerciseCounter}\\\large{#1}}
+	}
+	
+}
+{
+	\stepcounter{@exerciseCounter}
+}
+
+\NewDocumentEnvironment{subpart}{o}{
+	\def\subExerciseNumType{\arabic}
+	\IfNoValueTF{#1}{
+		\subsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}}
+	}
+	{
+		\subsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter} (#1)}
+	}
+	
+}
+{
+	\stepcounter{@subExerciseCounter}
+}
+
+\NewDocumentEnvironment{subsubpart}{o}{
+	\def\subSubExerciseNumType{\arabic}
+	\IfNoValueTF{#1}{
+		\subsubsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter}}
+	}
+	{
+		\subsubsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter} (#1)}
+	}
+	
+}
+{
+	\stepcounter{@subSubExerciseCounter}
+}
+
+\NewDocumentEnvironment{subparta}{o}{
+	\def\subExerciseNumType{\large\alph}
+	\IfNoValueTF{#1}{
+		\subsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}}
+	}
+	{
+		\subsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter} (#1)}
+	}
+	
+}
+{
+	\stepcounter{@subExerciseCounter}
+}	
+
+\NewDocumentEnvironment{subsubparta}{o}{
+	\def\subSubExerciseNumType{\large\alph}
+	\IfNoValueTF{#1}{
+		\subsubsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter}}
+	}
+	{
+		\subsubsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter} (#1)}
+	}
+	
+}
+{
+	\stepcounter{@subSubExerciseCounter}
+}
+
+\NewDocumentEnvironment{solution}{o}{
+	
+	\begin{proof}[\large\textsc{\underline{Solution}}]
+	\setcounter{@subExerciseCounter}{1}
+	\setcounter{@subSubExerciseCounter}{1}
+}
+{
+	\IfNoValueTF{#1}{
+		\renewcommand{\qedsymbol}{}
+	}{
+		\renewcommand{\qedsymbol}{#1}
+	}
+	\end{proof}
+	\setcounter{@subExerciseCounter}{1}
+	\setcounter{@subSubExerciseCounter}{1}
+}
+
+
+
+
+
+\renewcommand{\title}[1]{\def\@title {\scshape #1}}
+
+\def\@courseName{Course name}
+\def\@homeworkNum{-1}
+\def\@authorEmail{youremail@email.com}
+\def\@authorName{Author}
+
+
+\newcommand{\course}[1]{\def\@courseName{#1}}
+\newcommand{\hwnum}[1]{\def\@homeworkNum{#1}}
+\newcommand{\email}[1]{\def\@authorEmail{#1}}
+\newcommand{\name}[1]{\def\@authorName{#1}}
+
+
+\AtBeginDocument{
+	\everymath={}
+	\everydisplay={}
+	\ifthenelse{\equal{\@homeworkNum}{-1} }
+	{
+		\title{\@courseName}
+	}
+	{
+		\title{\LARGE\@courseName \\ \Large Assignment \@homeworkNum}
+	}
+	\ifthenelse{\equal{\@authorEmail}{youremail@email.com} }
+	{
+		\author{\@authorName}
+	}
+	{
+		\author{\@authorName \thanks{\@authorEmail}}
+	}
+	\maketitle
+}
+
+
+\endinput

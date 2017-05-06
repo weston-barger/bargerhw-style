@@ -1,0 +1,61 @@
+\documentclass[11pt]{article}
+
+\usepackage[draft]{bargerhw}
+
+
+\course{CSE 547}
+\hwnum{5}
+\name{Weston Barger}
+\email{weston.barger@gmail.com}
+
+\begin{document}
+
+\begin{exercise}
+This is an exercise.
+
+	\begin{subpart}
+	This is a subpart with a specified title.
+		\begin{subsubpart}
+		This is subsubpart text.
+		\end{subsubpart}
+	\end{subpart}
+
+\end{exercise}
+
+\begin{solution}
+Here is my solution.
+\begin{align}
+u(x,t)
+	&= \int_t^T \mathrm{d} s \int_{\mathds{R}} \mathrm{d} \zeta\, \Gamma_0\left( t, z; T, \zeta \right) f(\zeta), &
+\Gamma_0(t,z;T,\zeta)
+	&= \mathcal{N}(z - \zeta, T-t). \label{eq:soln}
+\end{align}
+Above we see \eqref{eq:soln}. Furthermore, we see the label on the left-hand side of \eqref{eq:soln}. Removing the optional ``draft'' argument from the ``$\backslash$usepackage\{bargerhw\}'' line will remove the label.
+\end{solution}
+
+
+
+\begin{exercise}[Problem 11.4 from the book]
+This is an exercise.
+
+	\begin{subparta}[With specified title]
+	This is a subparta with a specified title.
+		\begin{subsubparta}[With specified title]
+		This is a subsubparta with a specified title.
+		\end{subsubparta}
+	\end{subparta}
+
+\end{exercise}
+
+\begin{solution}[$\blacklozenge$]
+Here is my solution with $\blacklozenge$ ending.
+
+
+\begin{proof}
+	This is proof text.
+\end{proof}
+
+\end{solution}
+
+\end{document}
+
