@@ -106,6 +106,10 @@
 % needed to test for ifpdf
 \RequirePackage{ifpdf}
 
+\RequirePackage{relsize}
+\RequirePackage{xparse}
+\RequirePackage{ifthen}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 				OPTIONAL PACKAGE PROCESSING
@@ -199,7 +203,6 @@
 
 
 
-\usepackage{relsize}
 
 \let\oGamma \Gamma       
 \let\oSigma \Sigma      
@@ -229,8 +232,7 @@
 % do homework stuff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{xparse}
-\usepackage{ifthen}
+
 
 \newcounter{@exerciseCounter}
 \newcounter{@subExerciseCounter}
