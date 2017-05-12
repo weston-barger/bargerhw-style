@@ -50,9 +50,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
-
 % packages required for 
 
 \RequirePackage[
@@ -135,6 +132,7 @@
     \RequirePackage[LGRgreek,frenchmath]{mathastext}
     \MTgreekfont{lmtt} % no lgr lmvtt, so use lgr lmtt
     \Mathastext
+    
     \let\oGamma   \Gamma       
     \let\oSigma   \Sigma      
     \let\oLambda  \Lambda       
@@ -317,7 +315,7 @@
 	
 }
 {
-	
+	\stepcounter{@subExerciseCounter}
 }
 
 \NewDocumentEnvironment{subsubpart}{o}{
