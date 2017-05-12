@@ -13,6 +13,8 @@ To use, simply place "bargerhw.sty" and "lmacros.sty" in your latex path and use
 
 * `doublespace` - When specified, document is double spaced
 
+* `typewritter` - When specified, uses typewritter font, `LGRgreek` option in `mathastext`, and `lmtt` font for greek math letters 
+
 
 ### Commands for the document title 
 
