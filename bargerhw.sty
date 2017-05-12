@@ -20,11 +20,11 @@
 }
 
 
-% typewritter font
-\newif\if@typewritter
-\@typewritterfalse
-\DeclareOption{typewritter}{
-	\@typewrittertrue	
+% typewriter font
+\newif\if@typewriter
+\@typewriterfalse
+\DeclareOption{typewriter}{
+	\@typewritertrue	
 }
 
 % draft
@@ -127,7 +127,7 @@
 	\RequirePackage{graphicx}
 \fi
 
-\if@typewritter
+\if@typewriter
 	\renewcommand{\rmdefault}{\ttdefault}
 	\renewcommand*\familydefault{\rmdefault}
 
