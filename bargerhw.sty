@@ -272,18 +272,16 @@
 \newcounter{@exerciseCounter}
 \newcounter{@subExerciseCounter}
 \newcounter{@subSubExerciseCounter}
-\newcounter{@equationCounter}
 
-\setcounter{@exerciseCounter}{1}
+\setcounter{@exerciseCounter}{0}
 \setcounter{@subExerciseCounter}{1}
 \setcounter{@subSubExerciseCounter}{1}
-\setcounter{@equationCounter}{0}
 
 \def\subExerciseNumType{\arabic}
 \def\subSubExerciseNumType{\arabic}
 
-\numberwithin{equation}{@equationCounter}
-\numberwithin{theorem}{@equationCounter}
+\numberwithin{equation}{@exerciseCounter}
+\numberwithin{theorem}{@exerciseCounter}
 
 \NewDocumentEnvironment{exercise}{o}{
 	\setcounter{@subExerciseCounter}{1}
@@ -298,8 +296,6 @@
 	
 }
 {
-	\stepcounter{@exerciseCounter}
-	\stepcounter{@equationCounter}
 	\setcounter{@subExerciseCounter}{1}
 	\setcounter{@subSubExerciseCounter}{1}
 }
@@ -316,15 +312,16 @@
 }
 {
 	\stepcounter{@subExerciseCounter}
+    \setcounter{@subSubExerciseCounter}{1}
 }
 
 \NewDocumentEnvironment{subsubpart}{o}{
 	\def\subSubExerciseNumType{\arabic}
 	\IfNoValueTF{#1}{
-		\subsubsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter}}
+		\subsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter}}
 	}
 	{
-		\subsubsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter} (#1)}
+		\subsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter} (#1)}
 	}
 	
 }
@@ -344,15 +341,16 @@
 }
 {
 	\stepcounter{@subExerciseCounter}
+    \setcounter{@subSubExerciseCounter}{1}
 }	
 
 \NewDocumentEnvironment{subsubparta}{o}{
 	\def\subSubExerciseNumType{\large\alph}
 	\IfNoValueTF{#1}{
-		\subsubsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter}}
+		\subsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter}}
 	}
 	{
-		\subsubsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter} (#1)}
+		\subsection*{Part \arabic{@exerciseCounter}.\subExerciseNumType{@subExerciseCounter}.\subSubExerciseNumType{@subSubExerciseCounter} (#1)}
 	}
 	
 }
