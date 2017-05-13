@@ -284,6 +284,7 @@
 \numberwithin{theorem}{@exerciseCounter}
 
 \NewDocumentEnvironment{exercise}{o}{
+    \stepcounter{@exerciseCounter}
 	\setcounter{@subExerciseCounter}{1}
 	\setcounter{@subSubExerciseCounter}{1}
 	
