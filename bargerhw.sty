@@ -41,6 +41,13 @@
 	\@doublespacetrue
 }
 
+\newif\if@seqeqnum
+\@seqeqnumfalse
+\DeclareOption{seqeqnum}{
+    \@seqeqnumtrue
+}
+
+
 \ProcessOptions\relax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -201,7 +208,6 @@
 \allowdisplaybreaks               
 
 
-
 % Theorem style information
 \newtheoremstyle{plain}
   {}   % ABOVESPACE
@@ -213,11 +219,11 @@
   { } % HEADSPACE
   {\thmname{#1}\thmnumber{ #2}\ifx#3\empty\else\ (#3)\fi}
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{\underline{Theorem}}
 % [theorem] ==> theorems and lemmas will share a counter
-\newtheorem{lemma}[theorem]{Lemma}       	
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{\underline{Lemma}}       	
+\newtheorem{proposition}[theorem]{\underline{Proposition}}
+\newtheorem{corollary}[theorem]{\underline{Corollary}}
 
 
 % Theorem style information
@@ -226,42 +232,19 @@
   {}   % BELOWSPACE
   {}  % BODYFONT
   {}       % INDENT (empty value is the same as 0pt)
-  {\mdseries\scshape} % HEADFONT
+  {\underline\mdseries\scshape} % HEADFONT
   {.}         % HEADPUNCT
   { } % HEADSPACE
   {\thmname{#1}\thmnumber{ #2}\ifx#3\empty\else\ (#3)\fi}
 \theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{definition}[theorem]{\underline{Definition}}
+\newtheorem{example}[theorem]{\underline{Example}}
+\newtheorem{remark}[theorem]{\underline{Remark}}
+\newtheorem{assumption}[theorem]{\underline{Assumption}}
+\newtheorem{comment}[theorem]{\underline{Comment}}
 
 
 
-
-% \let\oGamma \Gamma       
-% \let\oSigma \Sigma      
-% \let\oLambda\Lambda       
-% \let\oPsi   \Psi         
-% \let\oDelta \Delta        
-% \let\oXi    \Xi          
-% \let\oUpsilon\Upsilon    
-% \let\oOmega \Omega       
-% \let\oTheta \Theta        
-% \let\oPi    \Pi          
-% \let\oPhi   \Phi      
-
-% \renewcommand\Gamma  {\mathlarger\oGamma  } 
-% \renewcommand\Sigma  {\mathlarger\oSigma  }
-% \renewcommand\Lambda {\mathlarger\oLambda }
-% \renewcommand\Psi    {\mathlarger\oPsi    }
-% \renewcommand\Delta  {\mathlarger\oDelta  }
-% \renewcommand\Xi     {\mathlarger\oXi     }
-% \renewcommand\Upsilon{\mathlarger\oUpsilon}
-% \renewcommand\Omega  {\mathlarger\oOmega  }
-% \renewcommand\Theta  {\mathlarger\oTheta  }
-% \renewcommand\Pi     {\mathlarger\oPi     }
-% \renewcommand\Phi    {\mathlarger\oPhi    }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % do homework stuff
@@ -280,25 +263,30 @@
 \def\subExerciseNumType{\arabic}
 \def\subSubExerciseNumType{\arabic}
 
+\if@seqeqnum
+\else
 \numberwithin{equation}{@exerciseCounter}
 \numberwithin{theorem}{@exerciseCounter}
+\fi
 
 \NewDocumentEnvironment{exercise}{o}{
-    \stepcounter{@exerciseCounter}
-	\setcounter{@subExerciseCounter}{1}
-	\setcounter{@subSubExerciseCounter}{1}
-	
-	\IfNoValueTF{#1}{
-		\section*{Exercise \arabic{@exerciseCounter}}
-	}
-	{
-		\section*{Exercise \arabic{@exerciseCounter}\\\large{#1}}
-	}
-	
+
+    % \stepcounter{@exerciseCounter}
+    \refstepcounter{@exerciseCounter}
+    \setcounter{@subExerciseCounter}{1}
+    \setcounter{@subSubExerciseCounter}{1}
+
+    \IfNoValueTF{#1}{
+        \section*{Exercise \arabic{@exerciseCounter}}
+    }
+    {
+        \section*{Exercise \arabic{@exerciseCounter}\\\large{#1}}
+    }
+    
 }
 {
-	\setcounter{@subExerciseCounter}{1}
-	\setcounter{@subSubExerciseCounter}{1}
+    \setcounter{@subExerciseCounter}{1}
+    \setcounter{@subSubExerciseCounter}{1}
 }
 
 \NewDocumentEnvironment{subpart}{o}{
