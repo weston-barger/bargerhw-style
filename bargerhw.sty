@@ -244,7 +244,11 @@
 \newtheorem{comment}[theorem]{\underline{Comment}}
 
 
-
+\expandafter\let\expandafter\oldproof\csname\string\proof\endcsname
+\let\oldendproof\endproof
+\renewenvironment{proof}[1][\proofname]{%
+  \oldproof[\scshape\underline{#1}]%
+}{\oldendproof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % do homework stuff
@@ -271,8 +275,8 @@
 
 \NewDocumentEnvironment{exercise}{o}{
 
-    % \stepcounter{@exerciseCounter}
-    \refstepcounter{@exerciseCounter}
+    \stepcounter{@exerciseCounter}
+    %\refstepcounter{@exerciseCounter}
     \setcounter{@subExerciseCounter}{1}
     \setcounter{@subSubExerciseCounter}{1}
 
@@ -349,7 +353,7 @@
 
 \NewDocumentEnvironment{solution}{o}{
 	
-	\begin{proof}[\large\textsc{\underline{Solution}}]
+	\begin{proof}[\large{Solution}]
 }
 {
 	\IfNoValueTF{#1}{
