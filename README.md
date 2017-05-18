@@ -13,7 +13,9 @@ To use, simply place "bargerhw.sty" and "lmacros.sty" in your latex path and use
 
 * `doublespace` - When specified, document is double spaced
 
-* `typewriter` - When specified, uses typewriter font, `LGRgreek` option in `mathastext`, and `lmtt` font for greek math letters 
+* `typewriter`  - When specified, uses typewriter font, `LGRgreek` option in `mathastext`, and `lmtt` font for greek math letters 
+
+* `seqeqnum`    - When specified, equations will be numbered in sequential order (1,2,3,...) instead of by exercise.
 
 
 ### Commands for the document title 
